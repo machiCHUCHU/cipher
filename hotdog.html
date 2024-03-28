@@ -1,89 +1,91 @@
 <!DOCTYPE html>
-<html lang="en"> 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tatay Cipher</title>
+  </head>
+  <body>
     <div class="container">
-        <h1>Vigenere Cipher Encrypter</h1>
-        <input type="text" id="plain-input" placeholder="plaintext">
-        <input type="key" id="key-input" placeholder="key">
-        <button id="button">encrypt</button>
+      <h1>Tatay Vigenere Cipher Encrypter</h1>
+      <input type="text" id="plain-input" placeholder="plaintext" />
+      <input type="key" id="key-input" placeholder="key" />
+      <button id="button">encrypt</button>
     </div>
-    <input id="result" disabled value = 'Result'>
-</body>
+    <input id="result" disabled value="Result" />
+  </body>
 </html>
 
 <script>
-    let button = document.getElementById('button')
-    let plain_input = document.getElementById('plain-input')
-    let key_input = document.getElementById('key-input')
-    let display = document.getElementById('result')
+  let button = document.getElementById("button");
+  let plain_input = document.getElementById("plain-input");
+  let key_input = document.getElementById("key-input");
+  let display = document.getElementById("result");
 
-    function encrypt(key, plain){
-        let upperCase_key = key.toUpperCase()
-        let arr_key = upperCase_key.split('')
-        let new_arr_key = []
-        let ascii_obj_key = []
-        let result = ''
-        let upperCase_plain = plain.toUpperCase()
-        let arr_plain = upperCase_plain.split('')
-        let ascii_obj_plain = []
-        let new_arr_plain = []
-        let arr_plain_space_idx = []
+  function encrypt(key, plain) {
+    let upperCase_key = key.toUpperCase();
+    let arr_key = upperCase_key.split("");
+    let new_arr_key = [];
+    let ascii_obj_key = [];
+    let result = "";
+    let upperCase_plain = plain.toUpperCase();
+    let arr_plain = upperCase_plain.split("");
+    let ascii_obj_plain = [];
+    let new_arr_plain = [];
+    let arr_plain_space_idx = [];
 
-        if(plain == "" && key == ""){
-            alert("You didn't input anything...")
-        }
-
-        for(var i = 0; i < arr_plain.length; i++){
-            new_arr_key.push(arr_key[i % arr_key.length])
-            if(arr_plain[i].charCodeAt() == 32){
-                arr_plain_space_idx.push(i)
-            }else{
-                new_arr_plain.push(arr_plain[i])
-            }
-        }
-
-        for(var i = 0; i < arr_key.length; i++){
-            let ascii_num = arr_key[i].charCodeAt()
-
-            if(ascii_num !== 32){
-                ascii_obj_key.push({
-                    keyletter: arr_key[i], ascii:ascii_num
-                })
-            }
-            for(var i = 0; i < new_arr_plain.length; i++){
-                let ascii_num = new_arr_plain[i].charCodeAt()
-                ascii_obj_plain.push({
-                    plainLetter:new_arr_plain[i], ascii:ascii_num
-                })
-            }
-
-            for(var i = 0; i < new_arr_plain.length; i++){
-                let currPlainAscii = new_arr_plain[i].charCodeAt()
-                let arrKeyIdx = 0
-                let currKeyAscii = new_arr_key[i].charCodeAt()
-                let simplifiedKey = currKeyAscii - 65
-                let sum = simplifiedKey + currPlainAscii
-
-                if(sum >= 65 && sum <= 90){
-                    result += String.fromCharCode(sum)
-                }else if(sum > 90){
-                    result += String.fromCharCode(65 + (sum % 91))
-                }else if(currPlainAscii == 32){
-                    result+=String.fromCharCode(currPlainAscii)
-                }
-            }
-
-            display.value = result
-            return console.log(`Here's the plain array w/o spaces`)
-        }
+    if (plain == "" && key == "") {
+      alert("You didn't input anything...");
     }
 
-    button.onclick = () => {
-        encrypt(key_input.value, plain_input.value)
+    for (var i = 0; i < arr_plain.length; i++) {
+      new_arr_key.push(arr_key[i % arr_key.length]);
+      if (arr_plain[i].charCodeAt() == 32) {
+        arr_plain_space_idx.push(i);
+      } else {
+        new_arr_plain.push(arr_plain[i]);
+      }
     }
+
+    for (var i = 0; i < arr_key.length; i++) {
+      let ascii_num = arr_key[i].charCodeAt();
+
+      if (ascii_num !== 32) {
+        ascii_obj_key.push({
+          keyletter: arr_key[i],
+          ascii: ascii_num,
+        });
+      }
+      for (var i = 0; i < new_arr_plain.length; i++) {
+        let ascii_num = new_arr_plain[i].charCodeAt();
+        ascii_obj_plain.push({
+          plainLetter: new_arr_plain[i],
+          ascii: ascii_num,
+        });
+      }
+
+      for (var i = 0; i < new_arr_plain.length; i++) {
+        let currPlainAscii = new_arr_plain[i].charCodeAt();
+        let arrKeyIdx = 0;
+        let currKeyAscii = new_arr_key[i].charCodeAt();
+        let simplifiedKey = currKeyAscii - 65;
+        let sum = simplifiedKey + currPlainAscii;
+
+        if (sum >= 65 && sum <= 90) {
+          result += String.fromCharCode(sum);
+        } else if (sum > 90) {
+          result += String.fromCharCode(65 + (sum % 91));
+        } else if (currPlainAscii == 32) {
+          result += String.fromCharCode(currPlainAscii);
+        }
+      }
+
+      display.value = result;
+      return console.log(`Here's the plain array w/o spaces`);
+    }
+  }
+
+  button.onclick = () => {
+    encrypt(key_input.value, plain_input.value);
+  };
 </script>
