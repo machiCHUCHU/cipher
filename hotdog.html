@@ -5,88 +5,150 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tatay Cipher</title>
+    <link rel="stylesheet" href="bootstrap.min.css" />
   </head>
   <body>
     <div class="container">
-      <h1>Tatay Vigenere Cipher Encrypter</h1>
-      <input type="text" id="plain-input" placeholder="plaintext" />
-      <input type="key" id="key-input" placeholder="key" />
-      <button id="button">encrypt</button>
+      <div class="row">
+        <div class="col-sm-6 text-center m-auto">
+          <div class="h1 text-primary" style="font-size: 50px">
+            Vigenere Cipher <span style="color: Blue;">Encrypter</span> | <span style="color: red;">Decrypter</span>
+          </div>
+        </div>
+        <div
+          class="col-sm-6 text-center"
+          style="display: flex; flex-direction: column"
+        >
+          <input type="text" id="plain" placeholder="Plaintext" />
+          <input type="key" id="key" placeholder="Key" />
+          <button id="lock" class="btn btn-primary">Encrypt</button>
+          <button id="unlock" class="btn btn-danger">Decrypt</button>
+          <div class="cont d-flex justify-content-center align-items-center">
+            <h1 class="result" id="display">Result</div>
+          </div>
+        </div>
+      </div>
     </div>
-    <input id="result" disabled value="Result" />
   </body>
 </html>
 
 <script>
-  let button = document.getElementById("button");
-  let plain_input = document.getElementById("plain-input");
-  let key_input = document.getElementById("key-input");
-  let display = document.getElementById("result");
+  let encryption = document.getElementById("lock"); //button for encryption
+  let decryption = document.getElementById("unlock"); //button for decryption
 
-  function encrypt(key, plain) {
-    let upperCase_key = key.toUpperCase();
-    let arr_key = upperCase_key.split("");
-    let new_arr_key = [];
-    let ascii_obj_key = [];
+  //function for button encryption to proceed with the encrypting process
+  encryption.onclick = () => {
+    let plaintext = document.getElementById("plain").value;
+    let keyword = document.getElementById("key").value;
+    let ciphertext = vigenereEncrypt(plaintext, keyword);
+
+    if (plaintext == "" || keyword == "") {
+      alert("Please add value!");
+    } else {
+      document.getElementById("display").innerHTML = ciphertext;
+    }
+  };
+
+  function vigenereEncrypt(plaintext, keyword) {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    let input = plaintext.toUpperCase();
+    let key = keyword.toUpperCase();
+
     let result = "";
-    let upperCase_plain = plain.toUpperCase();
-    let arr_plain = upperCase_plain.split("");
-    let ascii_obj_plain = [];
-    let new_arr_plain = [];
-    let arr_plain_space_idx = [];
+    let keyIndex = 0;
 
-    if (plain == "" && key == "") {
-      alert("You didn't input anything...");
-    }
+    for (let i = 0; i < input.length; i++) {
+      let char = input[i];
+      if (alphabet.includes(char)) {
+        let charIndex = alphabet.indexOf(char);
+        let keyCharIndex = alphabet.indexOf(key[keyIndex % key.length]);
+        let encryptedCharIndex = (charIndex + keyCharIndex) % alphabet.length;
 
-    for (var i = 0; i < arr_plain.length; i++) {
-      new_arr_key.push(arr_key[i % arr_key.length]);
-      if (arr_plain[i].charCodeAt() == 32) {
-        arr_plain_space_idx.push(i);
+        result += alphabet[encryptedCharIndex];
+        keyIndex++;
       } else {
-        new_arr_plain.push(arr_plain[i]);
+        result += char;
       }
     }
 
-    for (var i = 0; i < arr_key.length; i++) {
-      let ascii_num = arr_key[i].charCodeAt();
-
-      if (ascii_num !== 32) {
-        ascii_obj_key.push({
-          keyletter: arr_key[i],
-          ascii: ascii_num,
-        });
-      }
-      for (var i = 0; i < new_arr_plain.length; i++) {
-        let ascii_num = new_arr_plain[i].charCodeAt();
-        ascii_obj_plain.push({
-          plainLetter: new_arr_plain[i],
-          ascii: ascii_num,
-        });
-      }
-
-      for (var i = 0; i < new_arr_plain.length; i++) {
-        let currPlainAscii = new_arr_plain[i].charCodeAt();
-        let arrKeyIdx = 0;
-        let currKeyAscii = new_arr_key[i].charCodeAt();
-        let simplifiedKey = currKeyAscii - 65;
-        let sum = simplifiedKey + currPlainAscii;
-
-        if (sum >= 65 && sum <= 90) {
-          result += String.fromCharCode(sum);
-        } else if (sum > 90) {
-          result += String.fromCharCode(65 + (sum % 91));
-        } else if (currPlainAscii == 32) {
-          result += String.fromCharCode(currPlainAscii);
-        }
-      }
-
-      display.value = result;
-      return console.log(`Here's the plain array w/o spaces`);
-    }
+    return result;
   }
 
-  button.onclick = () => {
-    encrypt(key_input.value, plain_input.value);
+  //function for button decryption to proceed with the decryption process
+  decryption.onclick = () => {
+    let plaintext = document.getElementById("plain").value;
+    let keyword = document.getElementById("key").value;
+    let ciphertext = vigenereEncrypt(plaintext, keyword);
+    let decryptedPlainText = vigenereDecrypt(ciphertext, keyword);
+    console.log(ciphertext);
+    document.getElementById("display").innerHTML = decryptedPlainText;
   };
+
+  //decryption method
+  function vigenereDecrypt(ciphertext, keyword) {
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    var input = ciphertext.toUpperCase();
+    var key = keyword.toUpperCase();
+
+    let result = "";
+    let keyIndex = 0;
+
+    for (let i = 0; i < input.length; i++) {
+      const char = input[i];
+      if (alphabet.includes(char)) {
+        const charIndex = alphabet.indexOf(char);
+        const keyCharIndex = alphabet.indexOf(key[keyIndex % key.length]);
+        const decryptedCharIndex =
+          (charIndex - keyCharIndex + alphabet.length) % alphabet.length;
+
+        result += alphabet[decryptedCharIndex];
+        keyIndex++;
+      } else {
+        result += char;
+      }
+    }
+
+    return result;
+  }
 </script>
+<style>
+  html,
+  body {
+    height: 100%;
+  }
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+  input {
+    margin-bottom: 15px;
+    width: 100%;
+    height: 60px;
+    padding: 5px;
+    box-sizing: border-box;
+    text-align: center;
+    outline: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    font-size: large;
+  }
+  button {
+    margin-bottom: 10px;
+    height: 60px;
+    padding: 5px;
+    box-sizing: border-box;
+    border-radius: 15px;
+    text-align: center;
+  }
+  .cont{
+    height: 180px;
+    width: 100%;
+    border-radius: 15px;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgb(230, 228, 228);
+  }
+</style>
