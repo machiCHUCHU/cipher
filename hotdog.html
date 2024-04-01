@@ -8,11 +8,12 @@
     <link rel="stylesheet" href="bootstrap.min.css" />
   </head>
   <body>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-6 text-center m-auto">
           <div class="h1 text-primary" style="font-size: 50px">
-            Vigenere Cipher <span style="color: Blue;">Encrypter</span> | <span style="color: red;">Decrypter</span>
+            Vigenere Cipher <span style="color: Blue">Encrypter</span> |
+            <span style="color: red">Decrypter</span>
           </div>
         </div>
         <div
@@ -24,8 +25,9 @@
           <button id="lock" class="btn btn-primary">Encrypt</button>
           <button id="unlock" class="btn btn-danger">Decrypt</button>
           <div class="cont d-flex justify-content-center align-items-center">
-            <h1 class="result" id="display">Result</div>
+            <h4 class="result" id="display">Result</h4>
           </div>
+          <button id="clear" class="btn btn-dark mt-2">Clear</button>
         </div>
       </div>
     </div>
@@ -35,8 +37,14 @@
 <script>
   let encryption = document.getElementById("lock"); //button for encryption
   let decryption = document.getElementById("unlock"); //button for decryption
+  let clear = document.getElementById("clear");
 
   //function for button encryption to proceed with the encrypting process
+  clear.onclick = () => {
+    document.getElementById("plain").value = "";
+    document.getElementById("key").value = "";
+    document.getElementById("display").textContent = "Result";
+  };
   encryption.onclick = () => {
     let plaintext = document.getElementById("plain").value;
     let keyword = document.getElementById("key").value;
@@ -116,7 +124,7 @@
   body {
     height: 100%;
   }
-  .container {
+  .container-fluid {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,12 +151,12 @@
     border-radius: 15px;
     text-align: center;
   }
-  .cont{
+  .cont {
     height: 180px;
     width: 100%;
     border-radius: 15px;
     box-sizing: border-box;
-    text-align: center;
+
     background-color: rgb(230, 228, 228);
   }
 </style>
