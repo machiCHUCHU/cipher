@@ -54,13 +54,13 @@ if (isset($_GET['stud_id'])) {
                 $stmt->bindParam(':dated', $currentDate);
                 $stmt->bindParam(':in_AM', $currentTime);
                 $stmt->execute();
-                echo "Time-IN recorded for " . $row['name'];
+
             } else {
                 echo "Student not found";
             }
         }
     } else {
-        echo "You are not allowed to log in at this time.";
+        echo "Login for AM Ended.";
     }
 } else {
     echo "Invalid request";

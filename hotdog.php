@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="col-sm-6 text-center" style="display: flex; flex-direction: column">
-        <form method="POST" action="get.php" id="attendanceForm">
+        <form method="POST">
             <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
             <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
             <button type="button" id="timeOutBtn" class="btn btn-danger" style="width: 100%">Time-OUT</button>
@@ -50,6 +50,25 @@
         xhr.open('GET', 'get.php?stud_id=' + studentId);
         xhr.send();
     });
+
+    document.getElementById('timeOutBtn').addEventListener('click', function() {
+    var studentId = document.getElementById('studentId').value;
+
+    // AJAX request to record time-out
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            if (xhr.status === 200) {
+                var response = xhr.responseText;
+                document.getElementById('display').innerText = response;
+            } else {
+                console.error('Error recording time-out');
+            }
+        }
+    };
+    xhr.open('GET', 'timeout.php?stud_id=' + studentId);
+    xhr.send();
+});
  
 </script>
 <style>
