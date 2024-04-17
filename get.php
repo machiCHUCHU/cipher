@@ -62,7 +62,7 @@ if (isset($_GET['stud_id'])) {
             echo "Student not found";
         }
     } else {
-        echo "Log IN not allowed.";
+        echo "Log in not allowed.";
     }
 } else {
     echo "Invalid request";
