@@ -11,7 +11,6 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-      
         <div class="col-sm-12 text-center" style="display: flex; flex-direction: column">
         <div class="h1 text-primary m-5" style="font-size: 50px">
             Attendance Student's Week
@@ -25,8 +24,13 @@
             </div>
           </form>
           </div>
+        </form>
+        <form method="POST" action="eggcell.php" id="exportForm">
+          <button type="submit" class="btn btn-danger mt-5" style="width: 100%">Export to Excel</button>
+        </form>
       </div>
     </div>
+  </div>
   </body>
 </html>
 
