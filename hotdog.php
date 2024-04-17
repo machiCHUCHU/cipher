@@ -17,7 +17,7 @@
           </div>
         </div>
         <div class="col-sm-6 text-center" style="display: flex; flex-direction: column">
-        <form method="POST" action="process.php" id="attendanceForm">
+        <form method="POST" action="get.php" id="attendanceForm">
             <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
             <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
             <button type="button" id="timeOutBtn" class="btn btn-danger" style="width: 100%">Time-OUT</button>
