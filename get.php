@@ -13,13 +13,20 @@ if (isset($_GET['stud_id'])) {
     
    
     if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        $id=$row["id"];
         $studentInfo = "Name: " . $row['name'] . "\n";
         $studentInfo .= "Student ID: " . $row['stud_id'] . "\n";
         $studentInfo .= "Section: " . $row['section'];
         
- 
+        $currentTime = date('H:i:s');
+        $currentDate = date('Y-m-d');
+        $query = "INSERT INTO tblattendance (userid, dated, in_AM) VALUES (:id, :dated, :in_AM)";
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':dated', $currentDate);
+        $stmt->bindParam(':in_AM', $currentTime);
+        $stmt->execute();
         
-        // Display student info
         echo $studentInfo;
     } else {
         echo "Student not found";

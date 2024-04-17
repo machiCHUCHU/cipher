@@ -25,9 +25,6 @@
               <h4 class="result" id="display"></h4>
             </div>
           </form>
-            <form>
-            <button id="clear" type="submit" name="submit" class="btn btn-dark mt-2" style="width: 100%">Confirm</button>
-            </form>
           </div>
       </div>
     </div>
