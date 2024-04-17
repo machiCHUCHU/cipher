@@ -10,13 +10,13 @@ $loginTimeRangesAM = array(
 );
 
 $loginTimeRangesPM = array(
-    'start' => '13:00:00',
-    'end' => '14:00:00'
+    'start' => '23:00:00',
+    'end' => '24:00:00'
 );
 
 if (isset($_GET['stud_id'])) {
     $studentId = $_GET['stud_id'];
-    $currentTime = date('H:i:s');
+    $currentTime = date('H:i:s A');
 
     // Check if current time falls within AM login time range
     if (($currentTime >= $loginTimeRangesAM['start'] && $currentTime <= $loginTimeRangesAM['end']) ||
@@ -36,15 +36,15 @@ if (isset($_GET['stud_id'])) {
             $studentInfo .= "Time_IN: " . date('h:i:s A');
 
             // Determine whether to insert into AM or PM column
-            $currentTime = date('H:i:s');
             $currentDate = date('Y-m-d');
             if ($currentTime >= $loginTimeRangesAM['start'] && $currentTime <= $loginTimeRangesAM['end']) {
                 // Insert time-in record into tblattendance for AM
-                $query = "UPDATE tblattendance SET in_AM = :currentTime WHERE userid = :id AND dated = :dated";
+                $currentTime12hr = date('h:i:s A');
+                $query = "INSERT INTO tblattendance (userid, in_AM, dated) VALUES (:id, :in_AM, :dated)";
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':id', $id);
+                $stmt->bindParam(':in_AM', $currentTime12hr);
                 $stmt->bindParam(':dated', $currentDate);
-                $stmt->bindParam(':currentTime', $currentTime);
                 $stmt->execute();
             } elseif ($currentTime >= $loginTimeRangesPM['start'] && $currentTime <= $loginTimeRangesPM['end']) {
                 // Insert time-in record into tblattendance for PM
