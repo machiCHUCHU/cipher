@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <!--helllo mundo-->
@@ -12,109 +13,47 @@
       <div class="row">
         <div class="col-sm-6 text-center m-auto">
           <div class="h1 text-primary" style="font-size: 50px">
-            Attendance Students Week
+            Attendance Student's Week
           </div>
         </div>
-        <div
-          class="col-sm-6 text-center"
-          style="display: flex; flex-direction: column"
-        >
-          <input type="text" id="plain" placeholder="Student-ID" />
-          <button id="lock" class="btn btn-primary">Time-IN</button>
-          <div class="cont d-flex justify-content-center align-items-center">
-            <h4 class="result" id="display">Student's Info</h4>
+        <div class="col-sm-6 text-center" style="display: flex; flex-direction: column">
+        <form method="POST" action="process.php" id="attendanceForm">
+            <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
+            <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
+            <button type="button" id="timeOutBtn" class="btn btn-danger" style="width: 100%">Time-OUT</button>
+            <div class="cont d-flex justify-content-center align-items-center">
+              <h4 class="result" id="display"></h4>
+            </div>
+          </form>
+            <form>
+            <button id="clear" type="submit" name="submit" class="btn btn-dark mt-2" style="width: 100%">Confirm</button>
+            </form>
           </div>
-          <button id="clear" class="btn btn-dark mt-2">Confirm</button>
-        </div>
       </div>
     </div>
   </body>
 </html>
 
 <script>
-  let encryption = document.getElementById("lock"); //button for encryption
-  let decryption = document.getElementById("unlock"); //button for decryption
-  let clear = document.getElementById("clear");
-
-  //function for button encryption to proceed with the encrypting process
-  clear.onclick = () => {
-    document.getElementById("plain").value = "";
-    document.getElementById("key").value = "";
-    document.getElementById("display").textContent = "Result";
-  };
-  encryption.onclick = () => {
-    let plaintext = document.getElementById("plain").value;
-    let keyword = document.getElementById("key").value;
-    let ciphertext = vigenereEncrypt(plaintext, keyword);
-
-    if (plaintext == "" || keyword == "") {
-      alert("Please add value!");
-    } else {
-      document.getElementById("display").innerHTML = ciphertext;
-    }
-  };
-
-  function vigenereEncrypt(plaintext, keyword) {
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    let input = plaintext.toUpperCase();
-    let key = keyword.toUpperCase();
-
-    let result = "";
-    let keyIndex = 0;
-
-    for (let i = 0; i < input.length; i++) {
-      let char = input[i];
-      if (alphabet.includes(char)) {
-        let charIndex = alphabet.indexOf(char);
-        let keyCharIndex = alphabet.indexOf(key[keyIndex % key.length]);
-        let encryptedCharIndex = (charIndex + keyCharIndex) % alphabet.length;
-
-        result += alphabet[encryptedCharIndex];
-        keyIndex++;
-      } else {
-        result += char;
-      }
-    }
-
-    return result;
-  }
-
-  //function for button decryption to proceed with the decryption process
-  decryption.onclick = () => {
-    let plaintext = document.getElementById("plain").value;
-    let keyword = document.getElementById("key").value;
-    let ciphertext = vigenereEncrypt(plaintext, keyword);
-    let decryptedPlainText = vigenereDecrypt(ciphertext, keyword);
-    console.log(ciphertext);
-    document.getElementById("display").innerHTML = decryptedPlainText;
-  };
-
-  //decryption method
-  function vigenereDecrypt(ciphertext, keyword) {
-    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    var input = ciphertext.toUpperCase();
-    var key = keyword.toUpperCase();
-
-    let result = "";
-    let keyIndex = 0;
-
-    for (let i = 0; i < input.length; i++) {
-      const char = input[i];
-      if (alphabet.includes(char)) {
-        const charIndex = alphabet.indexOf(char);
-        const keyCharIndex = alphabet.indexOf(key[keyIndex % key.length]);
-        const decryptedCharIndex =
-          (charIndex - keyCharIndex + alphabet.length) % alphabet.length;
-
-        result += alphabet[decryptedCharIndex];
-        keyIndex++;
-      } else {
-        result += char;
-      }
-    }
-
-    return result;
-  }
+ document.getElementById('timeInBtn').addEventListener('click', function() {
+        var studentId = document.getElementById('studentId').value;
+        
+        // AJAX request to fetch student info
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE) {
+                if (xhr.status === 200) {
+                    var studentInfo = xhr.responseText;
+                    document.getElementById('display').innerText =  studentInfo;
+                } else {
+                    console.error('Error fetching student info');
+                }
+            }
+        };
+        xhr.open('GET', 'get.php?stud_id=' + studentId);
+        xhr.send();
+    });
+ 
 </script>
 <style>
   html,
