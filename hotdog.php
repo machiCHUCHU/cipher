@@ -12,22 +12,19 @@
       <div class="row">
         <div class="col-sm-6 text-center m-auto">
           <div class="h1 text-primary" style="font-size: 50px">
-            Vigenere Cipher <span style="color: Blue">Encrypter</span> |
-            <span style="color: red">Decrypter</span>
+            Attendance Students Week
           </div>
         </div>
         <div
           class="col-sm-6 text-center"
           style="display: flex; flex-direction: column"
         >
-          <input type="text" id="plain" placeholder="Plaintext" />
-          <input type="key" id="key" placeholder="Key" />
-          <button id="lock" class="btn btn-primary">Encrypt</button>
-          <button id="unlock" class="btn btn-danger">Decrypt</button>
+          <input type="text" id="plain" placeholder="Student-ID" />
+          <button id="lock" class="btn btn-primary">Time-IN</button>
           <div class="cont d-flex justify-content-center align-items-center">
-            <h4 class="result" id="display">Result</h4>
+            <h4 class="result" id="display">Student's Info</h4>
           </div>
-          <button id="clear" class="btn btn-dark mt-2">Clear</button>
+          <button id="clear" class="btn btn-dark mt-2">Confirm</button>
         </div>
       </div>
     </div>
