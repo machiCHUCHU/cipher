@@ -11,12 +11,11 @@
   <body>
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-6 text-center m-auto">
-          <div class="h1 text-primary" style="font-size: 50px">
+      
+        <div class="col-sm-12 text-center" style="display: flex; flex-direction: column">
+        <div class="h1 text-primary m-5" style="font-size: 50px">
             Attendance Student's Week
           </div>
-        </div>
-        <div class="col-sm-6 text-center" style="display: flex; flex-direction: column">
         <form method="POST">
             <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
             <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
