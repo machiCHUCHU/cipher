@@ -25,7 +25,7 @@
             </div>
           </form>
           <form method="POST" action="eggcell.php" id="exportForm">
-          <button type="submit" class="btn btn-danger mt-5" style="width: 100%">Export to Excel</button>
+          <button type="submit" class="btn btn-danger mt-5" style="width: 100%" hidden>Export to Excel</button>
         </form>
           </div>
       </div>
