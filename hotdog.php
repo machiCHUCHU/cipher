@@ -9,25 +9,28 @@
     <link rel="stylesheet" href="bootstrap.min.css" />
   </head>
   <body>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6 text-center m-auto">
-          <div class="h1 text-primary" style="font-size: 50px">
-            Attendance Student's Week
-          </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 text-center m-auto">
+        <div class="h1 text-primary" style="font-size: 50px">
+          Attendance Student's Week
         </div>
-        <div class="col-sm-6 text-center" style="display: flex; flex-direction: column">
+      </div>
+      <div class="col-sm-6 text-center" style="display: flex; flex-direction: column">
         <form method="POST" action="get.php" id="attendanceForm">
-            <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
-            <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
-            <button type="button" id="timeOutBtn" class="btn btn-danger" style="width: 100%">Time-OUT</button>
-            <div class="cont d-flex justify-content-center align-items-center">
-              <h4 class="result" id="display"></h4>
-            </div>
-          </form>
+          <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
+          <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
+          <button type="button" id="timeOutBtn" class="btn btn-danger" style="width: 100%">Time-OUT</button>
+          <div class="cont d-flex justify-content-center align-items-center">
+            <h4 class="result" id="display"></h4>
           </div>
+        </form>
+        <form method="POST" action="eggcell.php" id="exportForm">
+          <button type="submit" class="btn btn-danger mt-5" style="width: 100%">Export to Excel</button>
+        </form>
       </div>
     </div>
+  </div>
   </body>
 </html>
 
