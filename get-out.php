@@ -5,8 +5,8 @@ date_default_timezone_set('Asia/Manila');
 
 // Define time ranges for login (AM and PM)
 $loginTimeRangesAM = array(
-    'start' => '07:00:00',
-    'end' => '09:00:00'
+    'start' => '11:00:00',
+    'end' => '12:00:00'
 );
 
 $loginTimeRangesPM = array(
@@ -62,7 +62,7 @@ if (isset($_GET['stud_id'])) {
             echo "Student not found";
         }
     } else {
-        echo "Log OUT not allowed.";
+        echo "Log out not allowed.";
     }
 } else {
     echo "Invalid request";
