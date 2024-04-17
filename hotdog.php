@@ -65,7 +65,7 @@
             }
         }
     };
-    xhr.open('GET', 'timeout.php?stud_id=' + studentId);
+    xhr.open('GET', 'get-out.php?stud_id=' + studentId);
     xhr.send();
 });
  
