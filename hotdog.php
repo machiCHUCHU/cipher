@@ -13,7 +13,7 @@
       <div class="row">
       
         <div class="col-sm-12 text-center" style="display: flex; flex-direction: column">
-        <div class="h1 text-primary m-5" style="font-size: 50px">
+        <div class="h1 text-primary m-3" style="font-size: 50px">
             Attendance Student's Week
           </div>
         <form method="POST">
