@@ -10,8 +10,8 @@ $loginTimeRangesAM = array(
 );
 
 $loginTimeRangesPM = array(
-    'start' => '16:00:00',
-    'end' => '17:00:00'
+    'start' => '13:00:00',
+    'end' => '14:00:00'
 );
 
 if (isset($_GET['stud_id'])) {
