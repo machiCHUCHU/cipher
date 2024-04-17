@@ -39,20 +39,21 @@ if (isset($_GET['stud_id'])) {
             $currentDate = date('Y-m-d');
             if ($currentTime >= $loginTimeRangesAM['start'] && $currentTime <= $loginTimeRangesAM['end']) {
                 // Insert time-in record into tblattendance for AM
-                $currentTime12hr = date('h:i:s A');
+                $currentTime12 = date('h:i:s A');
                 $query = "INSERT INTO tblattendance (userid, in_AM, dated) VALUES (:id, :in_AM, :dated)";
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':id', $id);
-                $stmt->bindParam(':in_AM', $currentTime12hr);
+                $stmt->bindParam(':in_AM', $currentTime12);
                 $stmt->bindParam(':dated', $currentDate);
                 $stmt->execute();
             } elseif ($currentTime >= $loginTimeRangesPM['start'] && $currentTime <= $loginTimeRangesPM['end']) {
                 // Insert time-in record into tblattendance for PM
+                $currentTime12 = date('h:i:s A');
                 $query = "UPDATE tblattendance SET in_PM = :currentTime WHERE userid = :id AND dated = :dated";
                 $stmt = $conn->prepare($query);
                 $stmt->bindParam(':id', $id);
                 $stmt->bindParam(':dated', $currentDate);
-                $stmt->bindParam(':currentTime', $currentTime);
+                $stmt->bindParam(':currentTime', $currentTime12);
                 $stmt->execute();
             }
 
