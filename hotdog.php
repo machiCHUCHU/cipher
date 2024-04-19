@@ -9,13 +9,13 @@
     <link rel="stylesheet" href="bootstrap.min.css" />
   </head>
   <body>
-    <div class="container-fluid">
+  <nav class="navbar navbar-light bg-dark">
+        <span class="navbar-brand h1 text-light">Attendance</span>
+      </nav>
+    <div class="container-fluid" style="height:100vh;">
+   
       <div class="row">
-      
-        <div class="col-sm-12 text-center" style="display: flex; flex-direction: column">
-        <div class="h1 text-primary m-3" style="font-size: 50px">
-            Attendance Student's Week
-          </div>
+        <div class="col-sm-12 text-center" style="display: flex; flex-direction: column; align-items: center;">
         <form method="POST">
             <input type="text" name="stud_id" id="studentId" placeholder="Student-ID" />
             <button type="button" id="timeInBtn" class="btn btn-success" style="width: 100%">Time-IN</button>
@@ -25,7 +25,7 @@
             </div>
           </form>
           <form method="POST" action="eggcell.php" id="exportForm">
-          <button type="submit" class="btn btn-danger mt-5" style="width: 100%" hidden>Export to Excel</button>
+          <button type="submit" class="btn btn-danger mt-5" style="width: 100%" disabled>Export to Excel</button>
         </form>
           </div>
       </div>
@@ -77,8 +77,12 @@
   html,
   body {
     height: 100%;
+    overflow: hidden;
   }
-  .container-fluid {
+  .navbar{
+    justify-content: center;
+  }
+  .row {
     display: flex;
     justify-content: center;
     align-items: center;
