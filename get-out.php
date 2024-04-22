@@ -34,7 +34,7 @@ if (isset($_GET['stud_id'])) {
             $studentInfo = "Name: " . $row['name'] . "\n";
             $studentInfo .= "Student ID: " . $row['stud_id'] . "\n";
             $studentInfo .= "Section: " . $row['section'] . "\n";
-            $studentInfo .= "Time_IN: " . date('h:i:s A');
+            $studentInfo .= "Time_OUT: " . date('h:i:s A');
 
             if ($currentTime >= $LogoutimeRangeAM['start'] && $currentTime <= $LogoutimeRangeAM['end']) {
                 // Insert time-in record into tblattendance for AM
