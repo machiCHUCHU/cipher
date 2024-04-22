@@ -5,8 +5,8 @@ date_default_timezone_set('Asia/Manila');
 
 // Define time ranges for login (AM and PM)
 $LogoutimeRangeAM = array(
-    'start' => '11:30:00',
-    'end' => '12:30:00'
+    'start' => '23:30:00',
+    'end' => '24:30:00'
 );
 
 $LogoutimeRangePM = array(
@@ -45,7 +45,7 @@ if (isset($_GET['stud_id'])) {
                 $stmt->bindParam(':dated', $currentDate);
                 $stmt->bindParam(':currentTime', $currentTime12);
                 $stmt->execute();
-                echo $studentInfo . " (AM)";
+                echo $studentInfo;
             } elseif ($currentTime >= $LogoutimeRangePM['start'] && $currentTime <= $LogoutimeRangePM['end']) {
                 // Insert time-in record into tblattendance for PM
                 $currentTime12 = date('h:i:s A');

@@ -45,7 +45,7 @@ if (isset($_GET['stud_id'])) {
                 $stmt->bindParam(':dated', $currentDate);
                 $stmt->bindParam(':currentTime', $currentTime12);
                 $stmt->execute();
-                echo $studentInfo . " (AM)";
+                echo $studentInfo;
             } elseif ($currentTime >= $loginTimeRangesPM['start'] && $currentTime <= $loginTimeRangesPM['end']) {
                 // Insert time-in record into tblattendance for PM
                 $currentTime12 = date('h:i:s A');
