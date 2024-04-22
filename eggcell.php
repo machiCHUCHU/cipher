@@ -41,7 +41,7 @@ try {
         $filename = 'Students Week Attendance.xlsx';
         $writer->save($filename);
 
-        echo "<script>alert('Exported to Excel'); window.location.href = 'hotdog.php';</script>";
+        echo "<script>alert('Exported to Excel'); window.location.href = 'index.php';</script>";
     } else {
         echo "No records found.";
     }
