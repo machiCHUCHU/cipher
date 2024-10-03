@@ -5,13 +5,13 @@ date_default_timezone_set('Asia/Manila');
 
 // Define time ranges for login (AM and PM)
 $loginTimeRangesAM = array(
-    'start' => '07:00:00',
-    'end' => '09:00:00'
+    'start' => '07:30:00',
+    'end' => '08:30:00'
 );
 
 $loginTimeRangesPM = array(
     'start' => '13:00:00',
-    'end' => '14:00:00'
+    'end' => '13:32:00'
 );
 
 if (isset($_GET['stud_id'])) {

@@ -6,7 +6,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tatay Cipher</title>
-    <link rel="stylesheet" href="bootstrap.min.css" />
+    <link rel="stylesheet" href="bootstrap-5.3.2-dist/css/bootstrap.min.css" />
+    <script src="bootstrap.min.js"></script>
   </head>
   <body>
   <nav class="navbar navbar-light bg-dark">
@@ -24,12 +25,47 @@
               <h4 class="result" id="display"></h4>
             </div>
           </form>
-          <form method="POST" action="eggcell.php" id="exportForm">
-          <button type="submit" class="btn btn-dark mt-5" style="width: 100%" disabled>Export to Excel</button>
-        </form>
+          <button type="button" class="btn btn-dark mt-5" name="submit" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            Export Excel
+            </button>
         <form method="POST" action="reset.php" id="exportForm">
-          <button type="submit" name="submit" class="btn btn-dark" style="width: 100%" disabled>Reset Records</button>
+          <button type="submit" name="submit" class="btn btn-dark" style="width: 100%">Reset Records</button>
         </form>
+
+        
+
+
+<!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Select Year & Section</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="eggcell.php" id="exportForm">
+      <button type="submit" name="section" value="BSIT 1-2" class="btn btn-dark" style="width: 45%">BSIT 1-2</button>
+      <button type="submit" name="section" value="BSIT 1-1" class="btn btn-dark" style="width: 45%">BSIT 1-1</button>
+      <button type="submit" name="section" value="BSIT 2-1" class="btn btn-dark" style="width: 45%">BSIT 2-1</button>
+      <button type="submit" name="section" value="BSIT 2-1" class="btn btn-dark" style="width: 45%">BSIT 2-2S</button>
+      <button type="submit" name="section" value="BSIT 2-1" class="btn btn-dark" style="width: 45%">BSIT 3-1</button>
+      <button type="submit" name="section" value="BSIT 2-1" class="btn btn-dark" style="width: 45%">BSIT 3-2</button>
+      <button type="submit" name="section" value="BSIT 2-1" class="btn btn-dark" style="width: 45%">BSIT 4-1</button>
+      <button type="submit" name="section" value="BSIT 2-1" class="btn btn-dark" style="width: 45%">BSIT 4-2</button>
+
+      <button type="submit" name="section" value="all" class="btn btn-dark" style="width: 45%">All section</button>
+    
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+
+
           </div>
       </div>
     </div>
@@ -74,6 +110,14 @@
     xhr.open('GET', 'get-out.php?stud_id=' + studentId);
     xhr.send();
 });
+
+var myModal = document.getElementById('myModal')
+var myInput = document.getElementById('myInput')
+
+myModal.addEventListener('shown.bs.modal', function () {
+  myInput.focus()
+})
+
  
 </script>
 <style>

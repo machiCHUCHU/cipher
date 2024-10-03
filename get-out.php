@@ -5,12 +5,12 @@ date_default_timezone_set('Asia/Manila');
 
 // Define time ranges for login (AM and PM)
 $LogoutimeRangeAM = array(
-    'start' => '11:00:00',
+    'start' => '11:30:00',
     'end' => '12:00:00'
 );
 
 $LogoutimeRangePM = array(
-    'start' => '16:00:00',
+    'start' => '16:30:00',
     'end' => '17:30:00'
 );
 

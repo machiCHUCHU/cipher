@@ -6,11 +6,22 @@ use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$database", $dbusername, $dbpassword);
+    if($_SERVER['REQUEST_METHOD'] === 'POST'){
+        $section = $_POST['section'];
+        
+    
+        $conn = new PDO("mysql:host=$servername;dbname=$database", $dbusername, $dbpassword);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepare("SELECT tblstudents.stud_id, tblstudents.name, tblstudents.section, tblattendance.in_AM, tblattendance.out_AM,
+    if($section == 'all'){
+        $stmt = $conn->prepare("SELECT tblstudents.stud_id, tblstudents.name, tblstudents.section, tblattendance.in_AM, tblattendance.out_AM,
     tblattendance.in_PM, tblattendance.out_PM, tblattendance.dated FROM tblstudents INNER JOIN tblattendance ON tblstudents.id = tblattendance.userid");
+    }else{
+        $stmt = $conn->prepare("SELECT tblstudents.stud_id, tblstudents.name, tblstudents.section, tblattendance.in_AM, tblattendance.out_AM,
+    tblattendance.in_PM, tblattendance.out_PM, tblattendance.dated FROM tblstudents INNER JOIN tblattendance ON tblstudents.id = tblattendance.userid
+    WHERE tblstudents.section = '$section'");
+    }
+    
     $stmt->execute();
 
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -38,12 +49,13 @@ try {
         }
 
         $writer = new Xlsx($spreadsheet);
-        $filename = 'Students Week Attendance.xlsx';
+        $filename = "$section - Attendance.xlsx";
         $writer->save($filename);
 
         echo "<script>alert('Exported to Excel'); window.location.href = 'index.php';</script>";
     } else {
         echo "No records found.";
+    }
     }
 } catch(PDOException $e) {
     echo "Connection failed: " . $e->getMessage();
