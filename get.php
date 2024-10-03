@@ -47,7 +47,6 @@ if (isset($_GET['stud_id'])) {
                 $stmt->execute();
                 echo $studentInfo;
             } elseif ($currentTime >= $loginTimeRangesPM['start'] && $currentTime <= $loginTimeRangesPM['end']) {
-                // Insert time-in record into tblattendance for PM
                 $currentTime12 = date('h:i:s A');
                 $query = "UPDATE tblattendance SET in_PM = :currentTime, dated = :dated WHERE userid = :id";
                 $stmt = $conn->prepare($query);
